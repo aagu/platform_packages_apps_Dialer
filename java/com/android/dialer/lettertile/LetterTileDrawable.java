@@ -179,6 +179,10 @@ public class LetterTileDrawable extends Drawable {
     return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z');
   }
 
+  private static boolean isChineseLetter(final char c) {
+    return c >= 0x4E00 &&  c <= 0x9FA5;
+  }
+
   @Override
   public void draw(@NonNull final Canvas canvas) {
     final Rect bounds = getBounds();
@@ -339,7 +343,7 @@ public class LetterTileDrawable extends Drawable {
       final String displayName, final String identifier) {
     if (!TextUtils.isEmpty(displayName) && isEnglishLetter(displayName.charAt(0))) {
       letter = Character.toUpperCase(displayName.charAt(0));
-    } else if (!TextUtils.isEmpty(displayName) && com.mokee.utils.TextUtils.isChineseLetter(displayName.charAt(0))) {
+    } else if (!TextUtils.isEmpty(displayName) && isChineseLetter(displayName.charAt(0))) {
       letter = Character.toUpperCase(displayName.charAt(0));
       isChineseLetter = true;
     } else {
