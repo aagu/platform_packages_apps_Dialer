@@ -26,4 +26,8 @@
     <string name="call_via">呼叫途径</string>
     <string name="call_via_dialog_title">呼叫途径\u2026</string>
     <string name="call_log_stats_title">统计</string>
+    <string name="other_settings_label">其他设置</string>
+    <string name="fullscreen_caller_photo_title">全屏照片</string>
+    <string name="fullscreen_caller_photo_summary">接听和呼出电话时显示全屏照片</string>
+    <string name="fullscreen_caller_photo_message">您必须重启应用以生效</string>
 </resources>
