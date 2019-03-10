@@ -485,7 +485,7 @@ public class PhoneCallDetailsHelper
     }
     // Don't bother showing geo location for contacts.
     if (!TextUtils.isEmpty(details.namePrimary)) {
-      return false;
+      return true;
     }
     return true;
   }

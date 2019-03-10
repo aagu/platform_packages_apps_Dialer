@@ -128,7 +128,12 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 	legacy-test \
 	libphonenumber \
 	volley \
+	prebuilt-okhttp \
+  prebuilt-okio
 
+LOCAL_STATIC_JAVA_AAR_LIBRARIES := \
+	prebuilt-numberlocation
+	
 LOCAL_STATIC_ANDROID_LIBRARIES := \
 	android-support-core-ui \
 	$(ANDROID_SUPPORT_DESIGN_TARGETS) \

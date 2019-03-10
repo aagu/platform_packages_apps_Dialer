@@ -2,3 +2,5 @@
 # com.google.errorprone.annotations but don't exist on Android.
 -dontwarn java.lang.ClassValue
 -dontwarn javax.lang.model.element.Modifier
+-dontwarn org.codehaus.mojo.**
+-dontwarn org.conscrypt.**

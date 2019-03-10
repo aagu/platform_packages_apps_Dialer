@@ -20,8 +20,8 @@
   android:versionName="19.0">
 
   <uses-sdk
-    android:minSdkVersion="23"
-    android:targetSdkVersion="27"/>
+    android:minSdkVersion="25"
+    android:targetSdkVersion="28"/>
 
   <uses-permission android:name="android.permission.CALL_PHONE"/>
   <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -101,6 +101,10 @@
   <!--for OPPO-->
   <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS"/>
   <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
+
+  <!-- Permission to access Content Provider-->
+  <uses-permission android:name="aagu.NumberLocationProvider.READ" />
+  <uses-permission android:name="aagu.NumberLocationProvider.WRITE" />
 
   <application
     android:hardwareAccelerated="true"

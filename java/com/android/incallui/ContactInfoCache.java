@@ -36,6 +36,9 @@ import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.os.UserManagerCompat;
+
+import com.aagu.numberlocation.NumberUtil;
+
 import android.telecom.TelecomManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -266,7 +269,13 @@ public class ContactInfoCache implements OnImageLoadCompleteListener {
 
     cce.namePrimary = displayName;
     cce.number = displayNumber;
-    cce.location = info.geoDescription;
+    String location = NumberUtil.getNumberUtil(context).getLocalNumberInfo(cce.number, false);
+    if (!TextUtils.isEmpty(location)) {
+      info.name = location;
+      cce.location = info.name;
+    } else {
+      cce.location = info.geoDescription;
+    }
     cce.label = label;
     cce.isSipCall = isSipCall;
     cce.userType = info.userType;

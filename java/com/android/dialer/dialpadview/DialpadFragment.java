@@ -100,6 +100,9 @@ import com.android.dialer.util.ViewUtil;
 import com.android.dialer.widget.FloatingActionButtonController;
 import com.google.common.base.Ascii;
 import com.google.common.base.Optional;
+
+import com.aagu.numberlocation.NumberUtil;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -153,6 +156,7 @@ public class DialpadFragment extends Fragment
   private OnDialpadQueryChangedListener dialpadQueryListener;
   private DialpadView dialpadView;
   private EditText digits;
+  private TextView location;
   private int dialpadSlideInDuration;
   /** Remembers if we need to clear digits field when the screen is completely gone. */
   private boolean clearDigitsOnStop;
@@ -331,7 +335,13 @@ public class DialpadFragment extends Fragment
     }
 
     if (dialpadQueryListener != null) {
-      dialpadQueryListener.onDialpadQueryChanged(digits.getText().toString());
+      String number = digits.getText().toString();
+      dialpadQueryListener.onDialpadQueryChanged(number);
+      if (number.length() >= 3) {
+		    location.setText(NumberUtil.getNumberUtil(getActivity()).getLocalNumberInfo(number));
+      } else {
+        location.setText("");
+      }
     }
 
     updateDeleteButtonEnabledState();
@@ -396,6 +406,7 @@ public class DialpadFragment extends Fragment
     digits.setOnLongClickListener(this);
     digits.addTextChangedListener(this);
     digits.setElegantTextHeight(false);
+    location = dialpadView.getLocation();
 
     initPhoneNumberFormattingTextWatcherExecutor.executeSerial(getCurrentCountryIso());
 
@@ -1133,6 +1144,9 @@ public class DialpadFragment extends Fragment
       digits.getText().clear();
     }
     selectedAccount = null;
+    if (location != null) {
+      location.setText("");
+    }
   }
 
   private void handleDialButtonClickWithEmptyDigits() {

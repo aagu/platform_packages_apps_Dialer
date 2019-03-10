@@ -89,6 +89,9 @@ import com.android.incallui.ringtone.DialerRingtoneManager;
 import com.android.incallui.ringtone.InCallTonePlayer;
 import com.android.incallui.ringtone.ToneGeneratorFactory;
 import com.android.incallui.videotech.utils.SessionModificationState;
+
+import com.aagu.numberlocation.NumberUtil;
+
 import java.util.Objects;
 
 /** This class adds Notifications to the status bar for the in-call experience. */
@@ -559,13 +562,15 @@ public class StatusBarNotifier
     String preferredName =
         ContactDisplayUtils.getPreferredDisplayName(
             contactInfo.namePrimary, contactInfo.nameAlternative, contactsPreferences);
+    
+    String location = NumberUtil.getNumberUtil(context).getLocalNumberInfo(contactInfo.number);
     if (TextUtils.isEmpty(preferredName)) {
-      return TextUtils.isEmpty(contactInfo.number)
-          ? null
-          : BidiFormatter.getInstance()
-              .unicodeWrap(contactInfo.number, TextDirectionHeuristics.LTR);
+        if (!TextUtils.isEmpty(location)) {
+            return contactInfo.number + " " + location;
+        }
+        return contactInfo.number;
     }
-    return preferredName;
+    return !TextUtils.isEmpty(location) ? preferredName + " " + location : preferredName;
   }
 
   private void addPersonReference(
